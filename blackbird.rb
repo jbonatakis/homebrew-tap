@@ -6,20 +6,20 @@ class Blackbird < Formula
   on_macos do
     if Hardware::CPU.arm?
       url "https://github.com/jbonatakis/blackbird/releases/download/v#{version}/blackbird-v#{version}-darwin-arm64.tar.gz"
-      sha256 "914484ad9cab14f4eefc4161589ddad5d89ef3ca9a254c8297b71a49d20c26cf"
+      sha256 "08a102eacd39837e645477fd1a3f53b517ea11a594a2cff2a7686a6f413740d4"
     else
       url "https://github.com/jbonatakis/blackbird/releases/download/v#{version}/blackbird-v#{version}-darwin-amd64.tar.gz"
-      sha256 "03f5682bb3c4ed0f1ec4d74afcabb990bdcfa5173a0a0e5e7275b80c17b6b158"
+      sha256 "98b8e42df58128dd0b7b2f42e9e2dc61e8608b16642b398aef9e6022c44566f0"
     end
   end
 
   on_linux do
     if Hardware::CPU.arm?
       url "https://github.com/jbonatakis/blackbird/releases/download/v#{version}/blackbird-v#{version}-linux-arm64.tar.gz"
-      sha256 "1d8067f32c1ec043d2323c720f04b4be61ce25514760749755b2fa292d278eb3"
+      sha256 "97f11a5ffd1833f232b38a2f6bc582166a27bc6a77aae1d2adb29755d862a3e2"
     else
       url "https://github.com/jbonatakis/blackbird/releases/download/v#{version}/blackbird-v#{version}-linux-amd64.tar.gz"
-      sha256 "12738bfe9e368fe8843fe21ca1c22e15734f481bb7af5371c6f1d3073305c89c"
+      sha256 "914484ad9cab14f4eefc4161589ddad5d89ef3ca9a254c8297b71a49d20c26cf"
     end
   end
 
