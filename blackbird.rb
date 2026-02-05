@@ -1,5 +1,5 @@
 class Blackbird < Formula
-  desc "Blackbird CLI"
+  desc "The control plane for durable, dependency-aware planning and execution with AI agents."
   homepage "https://github.com/jbonatakis/blackbird"
   version "0.3.0"
 
@@ -31,4 +31,3 @@ class Blackbird < Formula
     assert_match version.to_s, shell_output("#{bin}/blackbird --version")
   end
 end
-
