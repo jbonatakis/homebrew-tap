@@ -1,12 +1,12 @@
 class Blackbird < Formula
   desc "Control plane for durable, dependency-aware planning and execution of AI agents"
   homepage "https://github.com/jbonatakis/blackbird"
-  version "0.3.0"
+  version "0.3.1"
 
   on_macos do
     if Hardware::CPU.arm?
       url "https://github.com/jbonatakis/blackbird/releases/download/v#{version}/blackbird-v#{version}-darwin-arm64.tar.gz"
-      sha256 "61bfd60e60607f189a0ea2c857e44f8b2f3b5def776e1f6e915bc049807df3ee"
+      sha256 "Not"
     else
       url "https://github.com/jbonatakis/blackbird/releases/download/v#{version}/blackbird-v#{version}-darwin-amd64.tar.gz"
       sha256 "03f5682bb3c4ed0f1ec4d74afcabb990bdcfa5173a0a0e5e7275b80c17b6b158"
