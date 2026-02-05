@@ -6,7 +6,7 @@ class Blackbird < Formula
   on_macos do
     if Hardware::CPU.arm?
       url "https://github.com/jbonatakis/blackbird/releases/download/v#{version}/blackbird-v#{version}-darwin-arm64.tar.gz"
-      sha256 "Not"
+      sha256 "914484ad9cab14f4eefc4161589ddad5d89ef3ca9a254c8297b71a49d20c26cf"
     else
       url "https://github.com/jbonatakis/blackbird/releases/download/v#{version}/blackbird-v#{version}-darwin-amd64.tar.gz"
       sha256 "03f5682bb3c4ed0f1ec4d74afcabb990bdcfa5173a0a0e5e7275b80c17b6b158"
