@@ -1,5 +1,5 @@
 class Blackbird < Formula
-  desc "The control plane for durable, dependency-aware planning and execution with AI agents."
+  desc "Control plane for durable, dependency-aware planning and execution of AI agents"
   homepage "https://github.com/jbonatakis/blackbird"
   version "0.3.0"
 
