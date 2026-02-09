@@ -1,25 +1,25 @@
 class Blackbird < Formula
   desc "Control plane for durable, dependency-aware planning and execution of AI agents"
   homepage "https://github.com/jbonatakis/blackbird"
-  version "0.3.1"
+  version "0.4.0"
 
   on_macos do
     if Hardware::CPU.arm?
       url "https://github.com/jbonatakis/blackbird/releases/download/v#{version}/blackbird-v#{version}-darwin-arm64.tar.gz"
-      sha256 "08a102eacd39837e645477fd1a3f53b517ea11a594a2cff2a7686a6f413740d4"
+      sha256 "78d080b4770d8a85a2a8dc298fed58ac3b11b6b33dd7cd1edd7df032f1334fe2"
     else
       url "https://github.com/jbonatakis/blackbird/releases/download/v#{version}/blackbird-v#{version}-darwin-amd64.tar.gz"
-      sha256 "98b8e42df58128dd0b7b2f42e9e2dc61e8608b16642b398aef9e6022c44566f0"
+      sha256 "1ce36cb1092cf691272f2c53f78643de8c764fdd6ab7ef927aa6ebebd08ea06f"
     end
   end
 
   on_linux do
     if Hardware::CPU.arm?
       url "https://github.com/jbonatakis/blackbird/releases/download/v#{version}/blackbird-v#{version}-linux-arm64.tar.gz"
-      sha256 "97f11a5ffd1833f232b38a2f6bc582166a27bc6a77aae1d2adb29755d862a3e2"
+      sha256 "a1a51e540b5052d3d052b26bb2a3c8c77d0cdedf88308e7d54c7f5ff94972712"
     else
       url "https://github.com/jbonatakis/blackbird/releases/download/v#{version}/blackbird-v#{version}-linux-amd64.tar.gz"
-      sha256 "914484ad9cab14f4eefc4161589ddad5d89ef3ca9a254c8297b71a49d20c26cf"
+      sha256 "46b25c1f2419c4e72828fcfa4f3feda63ae3cb0e5fc6b2fa40973cd6eba53cd5"
     end
   end
 
