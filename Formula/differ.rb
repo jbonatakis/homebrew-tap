@@ -1,26 +1,26 @@
 class Differ < Formula
   desc "A CLI tool for diffing directories and files with support for specs"
   homepage "https://github.com/jbonatakis/differ"
-  version "0.1.2"
+  version "0.1.3"
   license "MIT"
 
   on_macos do
     if Hardware::CPU.arm?
       url "https://github.com/jbonatakis/differ/releases/download/v#{version}/differ-v#{version}-darwin-arm64.tar.gz"
-      sha256 "6bb1763769bcc7fbb230904269e77f4077f7ef9be9ec911fee61c82266b703c8"
+      sha256 "efcaba7b9886c588ec3482904ba8df89dc43a0a8d39d9d68c8e4a599f79f614b"
     else
       url "https://github.com/jbonatakis/differ/releases/download/v#{version}/differ-v#{version}-darwin-amd64.tar.gz"
-      sha256 "d44f3004e2fb0b9facfabaa53f077c83454c56c68d3945f8cceb26c059364f4d"
+      sha256 "5f982b0f62ea729acf2eb4bae2f9b4d4dad1ae0d0fee293e9d3187533712ae2b"
     end
   end
 
   on_linux do
     if Hardware::CPU.arm?
       url "https://github.com/jbonatakis/differ/releases/download/v#{version}/differ-v#{version}-linux-arm64.tar.gz"
-      sha256 "ea8c08a65d5bbede25933192627676312ede57593220ff77a5b1e0c1ac3b2e65"
+      sha256 "77e3ba3409a38bf0e02580b0620654b86f2b2bde31f0cc585cf7d71d8f43920b"
     else
       url "https://github.com/jbonatakis/differ/releases/download/v#{version}/differ-v#{version}-linux-amd64.tar.gz"
-      sha256 "beda3f2942526720626291bf89d6a4f3cfeec9a96dfa0ac7c38c8d8dc1b70507"
+      sha256 "125e6739295169b05d6655e738991f40708b78d87df3cbc75008ee0241eb27e8"
     end
   end
 
