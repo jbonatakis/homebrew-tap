@@ -1,6 +1,6 @@
 cask "afterword" do
-  version "0.17.0"
-  sha256 "c2c8f0cc02fcce6101035c70dc7a759f30ef7354a0b2ceab93c8b70ebf61c40b"
+  version "0.18.0"
+  sha256 "c5e2793471e2e4b37c613bcc7ecde98700f8033e1f13d96caf910b5a67e56710"
 
   url "https://github.com/jbonatakis/homebrew-tap/releases/download/afterword-v#{version}/Afterword-v#{version}-macOS-arm64.zip"
   name "Afterword"
