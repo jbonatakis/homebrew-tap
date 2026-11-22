@@ -1,0 +1,67 @@
+name: Publish Afterword
+
+on:
+  push:
+    branches: ['publish/afterword-v*/**']
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    if: github.event.deleted == false
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          ref: ${{ github.event.after }}
+      - name: Verify the staged ZIP
+        run: |
+          [[ "$GITHUB_REF_NAME" =~ ^publish/afterword-(v(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*))/[0-9]+-[0-9]+$ ]]
+          tag="${BASH_REMATCH[1]}"
+          asset="Afterword-$tag-macOS-arm64.zip"
+          sha=$(cat afterword-upload/sha256)
+          [[ "$sha" =~ ^[a-f0-9]{64}$ ]]
+          cat afterword-upload/part-* > "$RUNNER_TEMP/$asset"
+          (cd "$RUNNER_TEMP" && echo "$sha  $asset" | sha256sum --check --strict)
+          echo "TAG=$tag" >> "$GITHUB_ENV"
+          echo "ASSET=$asset" >> "$GITHUB_ENV"
+          echo "SHA=$sha" >> "$GITHUB_ENV"
+      - name: Publish the app as a release asset
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          release="afterword-$TAG"
+          if ! gh release view "$release" >/dev/null 2>&1; then
+            gh release create "$release" --draft --target main --title "Afterword ${TAG#v}" \
+              --notes 'Apple Silicon, macOS 14.2 or later. Install with `brew install --cask jbonatakis/tap/afterword`.'
+          fi
+          metadata=$(gh release view "$release" --json isDraft,assets)
+          draft=$(jq -r '.isDraft' <<<"$metadata")
+          if [[ "$draft" == true ]] && ! jq -e --arg name "$ASSET" '.assets | any(.name == $name and .state == "uploaded")' <<<"$metadata" >/dev/null; then
+            gh release upload "$release" "$RUNNER_TEMP/$ASSET" --clobber
+          fi
+          # A published version always keeps its original bytes.
+          gh release view "$release" --json assets | jq -e --arg name "$ASSET" --arg digest "sha256:$SHA" \
+            '.assets | any(.name == $name and .state == "uploaded" and .digest == $digest)'
+          if [[ "$draft" == true ]]; then
+            gh release edit "$release" --draft=false --latest=false
+          fi
+      - name: Update the cask and remove the staging branch
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          for attempt in 1 2 3; do
+            git fetch origin main
+            git reset --hard FETCH_HEAD
+            python3 .github/scripts/update-afterword-cask.py "${TAG#v}" "$SHA"
+            if ! git diff --quiet -- Casks/afterword.rb; then
+              git add Casks/afterword.rb
+              git commit -m "Update Afterword cask to $TAG"
+            fi
+            # Publish the cask and retire its staging branch together.
+            retire=()
+            if [[ -n $(git ls-remote origin "refs/heads/$GITHUB_REF_NAME") ]]; then retire+=(":refs/heads/$GITHUB_REF_NAME"); fi
+            if git push --atomic origin HEAD:main "${retire[@]}"; then exit 0; fi
+          done
+          exit 1
